@@ -1,0 +1,61 @@
+/* styles.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.desktop {
+    background: url('https://w0.peakpx.com/wallpaper/957/738/HD-wallpaper-javascript-golden-logo-programming-language-brown-metal-background-creative-javascript-logo-programming-language-signs-javascript.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.taskbar {
+    background-color: #333;
+    color: white;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    border-bottom: rgba(31, 31, 31, 0.5);
+}
+
+.taskbarIcon {
+  width: auto;
+  height: 99%;
+  background-color: rgb(21, 21, 21);
+      display: flex;
+      align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.window {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.window-content {
+    padding: 20px;
+}
