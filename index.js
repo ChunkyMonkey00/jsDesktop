@@ -1,9 +1,8 @@
 class Window {
-  constructor(width, height, x, y) {
-    if(x == undefined) this.x = window.innerWidth/2;
-    if(y == undefined) this.y = window.innerHeight/2;
-    this.x = x;
-    this.y = y;
+  constructor(width, height, proc, x, y) {
+    if (x == undefined) this.x = window.innerWidth / 2; else this.x = x;
+    if(y == undefined) this.y = window.innerHeight/2; else this.y = y;
+    this.proc = proc;
     this.width = width;
     this.height = height;
     this.createWindow();
@@ -20,9 +19,10 @@ class Window {
     this.windowElement.style.backgroundColor = '#fff';
     this.windowElement.style.border = '1px solid #ccc';
     this.windowElement.style.zIndex = '10';
-    this.windowElement.textContent = 'New Window';
+    this.windowElement.textContent = this.proc;
     this.windowElement.classList.add("draggable");
     this.windowElement.classList.add("window");
+    this.windowElement.onmousedown = () => {focusOn(this.windowElement)}
 
     // Create the top navigation bar
     let navBar = document.createElement('div');
@@ -46,6 +46,7 @@ class Window {
     closeButton.style.cursor = 'pointer';
     closeButton.addEventListener('click', () => {
       this.windowElement.remove();
+      procList.splice(procList.indexOf(this.proc), 1);
     });
 
     // Append the close button to the nav bar
@@ -66,10 +67,16 @@ class TaskbarIcon {
   constructor(proc, text) {
     this.proc = proc;
     this.text = text;
+
+    this.createIcon();
   }
 
   createIcon() {
-
+    this.iconElement = document.createElement('div');
+    this.iconElement.textContent = this.text;
+    this.iconElement.classList.add("taskbarIcon");
+    document.querySelector("#taskbar").appendChild(this.iconElement);
+    this.iconElement.onclick = () => {openProc(this.proc)}
   }
 }
 
@@ -91,4 +98,30 @@ function makeDraggable() {
 }
 makeDraggable();
 
-var myWindow = new Window(300, 300);
+var procList = [];
+var pidList = [];
+
+function openProc(proc) {
+  if(procList.includes(proc)) return;
+  var procWin = new Window(300, 300, proc);
+  let rnd = Math.floor(Math.random() * 9999 + 1000);
+  if(!pidList.includes(rnd)) {
+    pidList.push(rnd);
+  } else {
+    do {
+      rnd++;
+      if (!pidList.includes(rnd)) pidList.push(rnd);
+    } while (!pidList.includes(rnd))
+  }
+  procList.push(proc);
+}
+
+function focusOn(el) {
+  document.querySelectorAll(".window").forEach((d) => {
+    d.style.zIndex = "10";
+  });
+  el.style.zIndex = "11";
+}
+
+var myIconc = new TaskbarIcon("c", "Cccccc");
+var myIcon = new TaskbarIcon("e", "Eeeeeee");
