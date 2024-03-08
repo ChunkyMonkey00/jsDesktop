@@ -18,7 +18,7 @@ body, html {
 .taskbar {
     background-color: #333;
     color: white;
-    height: 40px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,7 +28,7 @@ body, html {
 }
 
 .taskbarIcon {
-  width: auto;
+  width: 50px;
   height: 99%;
   background-color: rgb(21, 21, 21);
       display: flex;
@@ -39,6 +39,11 @@ body, html {
     margin-right: 10px;
     padding-left: 2px;
     padding-right: 2px;
+    overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  line-height: 1em; /* a */
+  cursor: pointer;
 }
 
 .window {
